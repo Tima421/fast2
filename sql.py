@@ -1,6 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine, MetaData, Table, Column, String, DateTime, insert, select,text,Integer
-
+from dotenv import load_dotenv
+load_dotenv()
 # Create an in-memory SQLite database
 engine = create_engine("sqlite:///:memory:")
 metadata_obj = MetaData()
@@ -53,8 +54,8 @@ import pandas as pd
 from llama_index.core import SQLDatabase
 from llama_index.llms.openai import OpenAI
 
-os.environ["OPENAI_API_KEY"] = "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"
-openai.api_key = os.environ["OPENAI_API_KEY"]
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 llm = OpenAI(temperature=0.1, model="gpt-3.5-turbo")
 sql_database = SQLDatabase(engine, include_tables=["DATA_INFO"])    
